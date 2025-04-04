@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
     res.render("main.ejs", { students10, students12});
 });
 
+app.get('/admission',(req,res)=>{
+  res.render("admission.ejs");
+})
 app.get("/toppers", (req, res) => {
     res.render("p-topper.ejs", { students10, students12 });
 });
