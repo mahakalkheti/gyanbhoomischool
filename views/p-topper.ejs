@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/stylesheet/p-topper.css">
+<h2>Class 10th Top Performers 🎖️</h2>
+
+    <section class="topper-section">
+        <div class="topper-box">
+            <img src="/img/akash.jpg" alt="2024">
+            <p>AKASH PATEL</p>
+            <p>96.4% CLASS: 12th</p>
+            <p>MP TOPPER</p>
+        </div>
+        <div class="topper-box">
+            <img src="/img/hemalata-khushwaha.jpg" alt="2024">
+            <p>HEMALATA KHUSHWAHA</p>
+            <p>96.4% CLASS:10th</p>
+            <p>DISTRIC TOPPER TOP 3rd RANK</p>
+
+        </div>
+        <div class="topper-box">
+            <img src="/img/arsad-khan.jpg" alt="2023">
+            <p>ARSAD KHAN</p>
+            <p>96.2% CLASS:10th</p>
+            <p>DISTRIC TOPPER TOP 3rd RANK</p>
+        </div>
+    </section>
+
+ <!-- Class 12th Topper Section -->
+<div class="topper-section">
+    <h2>Class 12th Top Performers 🏅</h2>
+    <div class="scroll-container">
+        <div class="student-grid" id="student-grid-12th">
+            <% students12.forEach(student => { %>
+                <div class="student-box">
+
+                    <img src="<%= student.image %>" alt="Topper" loading="lazy">
+                    <p><%= student.percentage %>%</p>
+                    <h4>Name: <%= student.name %></h4>
+                     <h4>Year: <%=student.year%></h4>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+<!-- Class 10th Topper Section -->
+<div class="topper-section">
+    <h2>Class 10th Top Performers 🎖️</h2>
+    <div class="scroll-container">
+        <div class="student-grid" id="student-grid-10th">
+            <% students10.forEach(student => { %>
+                <div class="student-box">
+                    <img src="<%= student.image %>" alt="Topper" loading="lazy">
+                    <h4><%= student.name %></h4>
+                    <p><%= student.percentage %>%</p>
+                    <h4>Year: <%=student.year%></h4>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/script/p-topper.js"></script>

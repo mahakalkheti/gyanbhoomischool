@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Test Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            color: black;
+            margin: auto;
+        }
+        .question {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        button {
+            background: #0072ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #fff3cd;
+            color: black;
+            font-weight: bold;
+            border-left: 5px solid #ffa502;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+        .celebration {
+            display: none;
+            font-size: 24px;
+            color: gold;
+            animation: pop 1s ease-in-out;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Your Knowledge!</h1>
+        <form id="quizForm">
+            <div id="questionsContainer"></div>
+            <button type="submit">Submit</button>
+        </form>
+
+        
+        <div id="result"></div>
+        <div id="celebration" class="celebration">🎉 Congratulations! 🎉</div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What is the capital of India?", options: ["Delhi", "Mumbai", "Kolkata", "Chennai"], answer: "Delhi" },
+            { question: "Which language runs in a web browser?", options: ["Java", "C", "Python", "JavaScript"], answer: "JavaScript" },
+            { question: "What does HTML stand for?", options: ["HyperText Markup Language", "HighText Machine Language", "Hyperloop Machine Language", "None of these"], answer: "HyperText Markup Language" }
+        ];
+
+        const questionsContainer = document.getElementById("questionsContainer");
+        
+        function loadQuestions() {
+            questions.forEach((q, index) => {
+                let questionHTML = `<div class="question">
+                    <p>${index + 1}. ${q.question}</p>`;
+                q.options.forEach(option => {
+                    questionHTML += `<input type="radio" name="q${index}" value="${option}"> ${option}<br>`;
+                });
+                questionHTML += `</div>`;
+                questionsContainer.innerHTML += questionHTML;
+            });
+        }
+
+        document.getElementById("quizForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let correct = 0;
+            let incorrect = [];
+            
+            questions.forEach((q, index) => {
+                let selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected) {
+                    if (selected.value === q.answer) {
+                        correct++;
+                    } else {
+                        incorrect.push({ question: q.question, correctAnswer: q.answer });
+                    }
+                } else {
+                    incorrect.push({ question: q.question, correctAnswer: q.answer });
+                }
+            });
+
+            let resultHTML = `<h2>Result</h2>
+                              <p class="correct">Correct Answers: ${correct} / ${questions.length}</p>`;
+            
+            if (incorrect.length > 0) {
+                resultHTML += `<h3 class="incorrect">Incorrect Answers:</h3><ul>`;
+                incorrect.forEach(q => {
+                    resultHTML += `<li>${q.question} - <span class="correct">Correct Answer:</span> ${q.correctAnswer}</li>`;
+                });
+                resultHTML += `</ul>`;
+            }
+
+            document.getElementById("result").innerHTML = resultHTML;
+            
+            if (correct === questions.length) {
+                document.getElementById("celebration").style.display = "block";
+            }
+        });
+
+        loadQuestions();
+    </script>
+</body>
+</html>
