@@ -13,10 +13,6 @@ const students12 = [
     { name: "AMIT PATEL",year:"2022-2023", percentage: 84.4, image: "/img/amt.jpg" },
     { name: "RAHUL KORI",year:"2022-2023", percentage: 87, image: "/img/rahul-kori.jpg" },
 
-
-
-
-
     { name: "ABHIJEET PATEL",year:"2023-2024", percentage: 96.4, image: "/img/abhijeet.jpg" },
     { name: "PRANAV PATEL",year:"2023-2024", percentage: 94.4, image: "/img/pranav.jpg" }
 ];
