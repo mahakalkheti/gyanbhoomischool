@@ -1,6 +1,8 @@
 const express = require("express");
 const { students10, students12 } = require("./student");
 const app = express();
+const compression = require("compression");
+app.use(compression());
 
 const path = require("path");
 app.set("views engine", "ejs");

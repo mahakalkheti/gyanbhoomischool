@@ -14,14 +14,12 @@ body {
 
     background: linear-gradient(to right, #000000, #434343, #f39c12);
     color: #fff;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
     border-top: 5px solid #f39c12;
 }
-.social-icons {
-    margin: 10px 0;
-}
+
 .social-icons a {
     color: #fff;
     font-size: 22px;
@@ -42,8 +40,8 @@ body {
 }
 
 .creator-photo {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     /* margin-top: 10px; */
 }
@@ -62,7 +60,6 @@ body {
 
 .contact-info {
     font-size: 18px;
-    margin: 10px 0;
 }
 .contact-info>p{
     color: #fff;
