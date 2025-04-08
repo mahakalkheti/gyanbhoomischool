@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>शुल्क भुगतान - ज्ञान भूमि स्कूल</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .containerrrr {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+
+      text-align: center;
+      color: #2c3e50;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .qr-section {
+      text-align: center;
+    }
+    .qr-section img {
+      max-width: 200px;
+      margin-top: 20px;
+    }
+    .note {
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #004aad;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #07408a;
+    }
+   
+  </style>
+</head>
+
+<body>
+  <div class="containerrrr">
+    <h2>ज्ञान भूमि स्कूल - शुल्क भुगतान</h2>
+    <form id="paymentForm">
+      <label>छात्र का नाम</label>
+      <input type="text" id="name" placeholder="पूरा नाम लिखें" required />
+
+      <label>कक्षा</label>
+      <select id="class" required>
+        <option value="">कक्षा चुनें</option>
+        <option>नर्सरी</option>
+        <option>एल.के.जी.</option>
+        <option>यू.के.जी.</option>
+        <option>1वीं</option>
+        <option>2वीं</option>
+        <option>3वीं</option>
+        <option>4वीं</option>
+        <option>5वीं</option>
+        <option>6वीं</option>
+        <option>7वीं</option>
+        <option>8वीं</option>
+        <option>9वीं</option>
+        <option>10वीं</option>
+        <option>11वीं</option>
+        <option>12वीं</option>
+      </select>
+
+      <label>शुल्क राशि (₹)</label>
+      <input type="number" id="amount" placeholder="राशि दर्ज करें" required />
+
+      <div class="qr-section">
+        <p>नीचे दिया गया QR कोड स्कैन करके शुल्क जमा करें:</p>
+        <img src="/img/school/qr.jpg" alt="QR कोड" />
+        <div class="note">
+          भुगतान के बाद कृपया स्क्रीनशॉट भेजें:<br/>
+          <strong>+91-9827380701 (व्हाट्सएप पर)</strong>
+        </div>
+      </div>
+
+      <button type="button" onclick="sendToWhatsApp()">सबमिट करें</button>
+    </form>
+
+   
+  </div>
+
+  <script>
+    function sendToWhatsApp() {
+      const name = document.getElementById("name").value.trim();
+      const studentClass = document.getElementById("class").value;
+      const amount = document.getElementById("amount").value;
+
+      if (!name || !studentClass || !amount) {
+        alert("कृपया सभी जानकारी भरें।");
+        return;
+      }
+
+      // Construct the message
+      const message = `*ज्ञान भूमि स्कूल - शुल्क भुगतान*\n\nछात्र का नाम: ${name}\nकक्षा: ${studentClass}\nराशि: ₹${amount}\n\nQR द्वारा भुगतान कर दिया गया है। कृपया स्क्रीनशॉट देखें।`;
+
+      // Construct the WhatsApp API URL
+      const whatsappNumber = "9827380701"; // अपना व्हाट्सएप नंबर डालें
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      // Open the WhatsApp URL in a new tab
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>

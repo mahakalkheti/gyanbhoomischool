@@ -1,84 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Admission Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        input, select, button {
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background: green;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Admission Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .admission-form-wrapper {
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+    }
+    .form-title {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .form-input, .form-select, .form-button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .form-button {
+      background: green;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Student Admission Form</h2>
-        <input type="text" id="name" placeholder="Student Name" required>
-        <input type="text" id="father" placeholder="Father's Name" required>
-        <input type="text" id="mother" placeholder="Mother's Name" required>
-        <input type="text" id="address" placeholder="Address" required>
-        <input type="tel" id="contact" placeholder="Contact Number" required>
-        <select id="class">
-            <option value="Nursery">Nursery</option>
-            <option value="LKG">LKG</option>
-            <option value="UKG">UKG</option>
-            <option value="Class 1">Class 1</option>
-            <option value="Class 2">Class 2</option>
-            <option value="Class 3">Class 3</option>
-            <option value="Class 4">Class 4</option>
-            <option value="Class 5">Class 5</option>
-            <option value="Class 6">Class 6</option>
-            <option value="Class 7">Class 7</option>
-            <option value="Class 8">Class 8</option>
-            <option value="Class 9">Class 9</option>
-            <option value="Class 10">Class 10</option>
-            <option value="Class 11">Class 11</option>
-            <option value="Class 12">Class 12</option>
-        </select>
-        <button onclick="sendToWhatsApp()">Submit</button>
-    </div>
-    <script>
-        function sendToWhatsApp() {
-            let name = document.getElementById("name").value;
-            let father = document.getElementById("father").value;
-            let mother = document.getElementById("mother").value;
-            let address = document.getElementById("address").value;
-            let contact = document.getElementById("contact").value;
-            let studentClass = document.getElementById("class").value;
+  <div class="admission-form-wrapper">
+    <h2 class="form-title">Student Admission Form</h2>
+    <input type="text" id="studentName" class="form-input" placeholder="Student Name" required>
+    <input type="text" id="fatherName" class="form-input" placeholder="Father's Name" required>
+    <input type="text" id="motherName" class="form-input" placeholder="Mother's Name" required>
+    <input type="date" id="dob" class="form-input" placeholder="Date of Birth" required>
+    <input type="text" id="studentAddress" class="form-input" placeholder="Address" required>
+    <input type="tel" id="contactNumber" class="form-input" placeholder="Contact Number" required>
+    <select id="studentClass" class="form-select">
+      <option value="Nursery">Nursery</option>
+      <option value="LKG">LKG</option>
+      <option value="UKG">UKG</option>
+      <option value="Class 1">Class 1</option>
+      <option value="Class 2">Class 2</option>
+      <option value="Class 3">Class 3</option>
+      <option value="Class 4">Class 4</option>
+      <option value="Class 5">Class 5</option>
+      <option value="Class 6">Class 6</option>
+      <option value="Class 7">Class 7</option>
+      <option value="Class 8">Class 8</option>
+      <option value="Class 9">Class 9</option>
+      <option value="Class 10">Class 10</option>
+      <option value="Class 11">Class 11</option>
+      <option value="Class 12">Class 12</option>
+    </select>
+    <button class="form-button" onclick="sendToWhatsApp()">Submit</button>
+  </div>
 
-            // Construct the message
-            let message = `Student Admission Details:\n\nName: ${name}\nFather's Name: ${father}\nMother's Name: ${mother}\nAddress: ${address}\nContact: ${contact}\nClass: ${studentClass}`;
+  <script>
+    function sendToWhatsApp() {
+      const name = document.getElementById("studentName").value;
+      const father = document.getElementById("fatherName").value;
+      const mother = document.getElementById("motherName").value;
+      const dob = document.getElementById("dob").value;
+      const address = document.getElementById("studentAddress").value;
+      const contact = document.getElementById("contactNumber").value;
+      const studentClass = document.getElementById("studentClass").value;
 
-            // Construct the WhatsApp API URL
-            let whatsappUrl = `https://api.whatsapp.com/send?phone=9827380701&text=${encodeURIComponent(message)}`;
+      let message = `Student Admission Details:\n\n` +
+        `Name: ${name}\nFather's Name: ${father}\nMother's Name: ${mother}\n` +
+        `Date of Birth: ${dob}\nAddress: ${address}\nContact: ${contact}\nClass: ${studentClass}`;
 
-            // Open the WhatsApp URL in a new tab
-            window.open(whatsappUrl, '_blank');
-        }
-    </script>
+      let whatsappUrl = `https://api.whatsapp.com/send?phone=9827380701&text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
 </body>
 </html>

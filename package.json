@@ -1,7 +1,7 @@
 {
   "name": "gbphs",
   "version": "1.0.0",
-  "description": "",
+  "description": "A modern and responsive website for Gyan Bhoomi School with student fee payment, and school information features.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

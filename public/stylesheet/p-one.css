@@ -1,102 +1,103 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    background-color: white;
-    color: white;
-    text-align: center;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 .p-t-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    max-width: 1200px;
+    margin: auto;
     padding: 20px;
-    margin-top: 120px;
 }
 
 .announcement {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: rgba(0, 174, 255, 0.2); /* Light Blue */
-    padding: 10px;
-    border-radius: 8px;
-    color: #00aef8; /* Neon Blue */
-    width: 100%;
-    border: 1px solid rgba(0, 174, 255, 0.5);
-}
+    margin-top: 100px;
 
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    background-color: #004aad;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .p-one {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid #f39c12;
-    box-shadow: 0px 5px 20px rgba(0, 174, 255, 0.5);
-    max-width: 700px;
     text-align: center;
-    backdrop-filter: blur(8px); 
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.welcome-text {
-    text-shadow: 3px 3px 10px rgba(0, 174, 255, 0.5);
+.welcome-text .small {
+    font-size: 20px;
+    color: #777;
+    letter-spacing: 1px;
 }
 
-.small {
-    font-size: clamp(1rem, 2.5vw, 2rem);
-    font-weight: 500;
-    color: black;
-    letter-spacing: 2px;
-}
-
-.large {
-    font-size: clamp(2.5rem, 8vw, 6rem);
+.welcome-text .large {
+    font-size: 40px;
     font-weight: bold;
-    text-transform: uppercase;
-    color:   #f39c12;
+    margin: 10px 0;
+    color: #004aad;
 }
 
 .description {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    color: black;
-    border: 1px solid rgba(0, 174, 255, 0.4);
+    font-size: 18px;
+    margin: 20px auto;
+    max-width: 800px;
+    line-height: 1.8;
+    color: #555;
 }
 
 .admission-btn-container {
-    text-align: center;
     margin-top: 20px;
 }
 
 .admission-btn {
     display: inline-block;
-    background: #ff5722;
-    color: white;
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: bold;
+    background-color: #004aad;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 25px;
     text-decoration: none;
-    border-radius: 5px;
-    transition: 0.3s ease-in-out;
 }
 
 .admission-btn:hover {
-    background: #e64a19;
+    background-color: #00338e;
+}
+
+/* 🔄 Image Slider Styling */
+.image-slider-container {
+    margin-top: 40px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+.image-slider-container::-webkit-scrollbar {
+    height: 6px;
+}
+.image-slider-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.image-slider {
+    display: flex;
+    gap: 20px;
+}
+
+.image-slider img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.image-slider img:hover {
+    transform: scale(1.05);
 }

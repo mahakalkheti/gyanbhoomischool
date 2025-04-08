@@ -4,6 +4,13 @@ const app = express();
 const compression = require("compression");
 app.use(compression());
 
+app.use((req,res,next)=>{
+    if(req.headers['x-forwarded-proto'] !== 'https'){
+         return res.redirect('https://'+req.headers.host+req.url);
+    }
+    next();
+});
+
 const path = require("path");
 app.set("views engine", "ejs");
 app.use(express.static(__dirname + '/public')); 
@@ -33,9 +40,21 @@ app.get("/study-metrial", (req, res) => {
 app.get("/Teacher", (req, res) => {
     res.render("staff.ejs");
   });
+  app.get("/gallery",(req,res)=>{
+    res.render("gallery.ejs");
+  });
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
+  app.get("/fees",(req,res)=>{
+    res.render("fees.ejs");
+  });
+
+  app.get("/about",(req,res)=>{
+    res.render("p-three.ejs");
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    res.sendFile(path.join(__dirname,"sitemap.xml"));
+});
 
 
 app.get('*', (req, res) => {
