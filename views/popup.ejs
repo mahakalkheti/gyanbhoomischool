@@ -1,0 +1,30 @@
+<!-- Popup Container -->
+<link rel="stylesheet" href="/stylesheet/popup.css">
+<div id="popupModal" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <img src="/img/school/bada.jpg" alt="Popup Image">
+        <p>WELLCOME TO GBPHS WEBSITE! 🎉</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("popupModal");
+        const closeBtn = document.querySelector(".close-btn");
+
+        setTimeout(() => {
+            popup.classList.add("show");
+        }, 500); 
+
+        closeBtn.addEventListener("click", () => {
+            popup.classList.remove("show");
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === popup) {
+                popup.classList.remove("show");
+            }
+        });
+    });
+</script>

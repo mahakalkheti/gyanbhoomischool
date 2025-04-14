@@ -70,3 +70,8 @@ body {
 .student-box>h4{
     color: black;
 }
+
+
+.student_box>img{
+width: 100%;
+}

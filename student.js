@@ -18,11 +18,9 @@ const students12 = [
 ];
 
 const students10 = [
-    { name: "ROHIT PATEL",year:"2023-2024", percentage: 95.8, image: "/img/rohit-10-24.webp" },
-    { name: "SHEETAL PATEL",year:"2023-2024", percentage: 97, image: "/img/seetal-patel.jpg" },
-    // { name: "HARSIT TIWARI",year:"2022-2023", percentage: 96, image: "/img/akash.jpg" },
-    // { name: "SUMIT TIWARI",year:"2022-2023", percentage: 95, image: "/img/akash.jpg" },
-    // { name: "ADARSH PATEL",year:"2022-2023", percentage: 95, image: "/img/akash.jpg" }
+    // { name: "ROHIT PATEL",year:"2023-2024", percentage: 95.8, image: "/img/rohit-10-24.webp" },
+    // { name: "SHEETAL PATEL",year:"2023-2024", percentage: 97, image: "/img/seetal-patel.jpg" },
+
 ];
 
 

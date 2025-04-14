@@ -4,12 +4,12 @@ const app = express();
 const compression = require("compression");
 app.use(compression());
 
-app.use((req,res,next)=>{
-    if(req.headers['x-forwarded-proto'] !== 'https'){
-         return res.redirect('https://'+req.headers.host+req.url);
-    }
-    next();
-});
+// app.use((req,res,next)=>{
+//     if(req.headers['x-forwarded-proto'] !== 'https'){
+//          return res.redirect('https://'+req.headers.host+req.url);
+//     }
+//     next();
+// });
 
 const path = require("path");
 app.set("views engine", "ejs");
@@ -63,5 +63,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || '3000';
 app.listen(port, () => {
-    console.log('Server is running on port : ');
+    console.log('Server is running on port : ' +port);
 });
