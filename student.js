@@ -9,8 +9,6 @@ const students12 = [
     { name: "ANJALI PATEL",year:"2022-2023", percentage: 82, image: "/img/angali.jpg" },
     { name: "DISHA TIWARI",year:"2022-2023", percentage: 82.2, image: "/img/kutti.jpg" },
     { name: "KHUSHI BUNKAR",year:"2022-2023", percentage: 82, image: "/img/khusbhi-kori.jpg" },
-    { name: "VISHAKHA KHUSHWAHA",year:"2022-2023", percentage: 82, image: "/img/gobar.jpg" },
-    { name: "AMIT PATEL",year:"2022-2023", percentage: 84.4, image: "/img/amt.jpg" },
     { name: "RAHUL KORI",year:"2022-2023", percentage: 87, image: "/img/rahul-kori.jpg" },
 
     { name: "ABHIJEET PATEL",year:"2023-2024", percentage: 96.4, image: "/img/abhijeet.jpg" },
