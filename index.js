@@ -2,55 +2,95 @@ const express = require("express");
 const { students10, students12 } = require("./student");
 const app = express();
 
-app.use((req,res,next)=>{
-    if(req.headers['x-forwarded-proto'] !== 'https'){
-         return res.redirect('https://'+req.headers.host+req.url);
-    }
-    next();
-});
+const mongoose = require("mongoose");
+const Blog = require("./models/model.js");
 
 const path = require("path");
-app.set("views engine", "ejs");
+
+// Set the view engine to EJS
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public')); 
 app.set("views", path.join(__dirname, "views"));
 
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Connect to MongoDB
+async function main() {
+  try {
+    const mongodbURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+    await mongoose.connect(mongodbURL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Failed to connect to MongoDB", err);
+  }
+}
+main();
+
+// Routes
 app.get('/', (req, res) => {
-    res.render("main.ejs", { students10, students12});
+    res.render("main.ejs", { students10, students12 });
 });
 
-app.get('/admission',(req,res)=>{
-  res.render("admission.ejs");
-})
+app.get("/from", (req, res) => {
+  res.render("from");
+});
+
+// POST: Save blog to DB
+app.post("/blogs", async (req, res) => {
+  const { name, father, mother, address, mobile } = req.body;
+  try {
+    const newBlog = new Blog({ name, father, mother, address, mobile });
+    await newBlog.save();
+    res.send("Blog saved successfully!");
+  } catch (err) {
+    console.error("Error saving blog:", err);
+    res.status(500).send("Failed to save blog.");
+  }
+});
+
+// GET: All blogs
+app.get("/blogs", async (req, res) => {
+  try {
+    const blogs = await Blog.find({});
+    res.json(blogs);
+  } catch (err) {
+    console.error("Error fetching blogs:", err);
+    res.status(500).send("Failed to fetch blogs.");
+  }
+});
+
 app.get("/toppers", (req, res) => {
     res.render("p-topper.ejs", { students10, students12 });
 });
 
-
-  app.get("/test", (req, res) => {
+app.get("/test", (req, res) => {
     res.render("test.ejs");
-  });
+});
 
-
-  app.get("/gallery",(req,res)=>{
+app.get("/gallery", (req, res) => {
     res.render("gallery.ejs");
-  });
+});
 
-  app.get("/fees",(req,res)=>{
+app.get("/fees", (req, res) => {
     res.render("fees.ejs");
-  });
-
-
-  app.get("/sitemap.xml", (req, res) => {
-    res.sendFile(path.join(__dirname,"sitemap.xml"));
 });
 
+app.get("/sitemap.xml", (req, res) => {
+    res.sendFile(path.join(__dirname, "sitemap.xml"));
+});
 
+// Catch-all route for undefined pages
 app.get('*', (req, res) => {
-    res.send("this page not available RAJKRITI.....");
+    res.send("This page is not available RAJKRITI.....");
 });
 
+// Start the server
 const port = process.env.PORT || '3000';
 app.listen(port, () => {
-    console.log('Server is running on port : ');
+    console.log('Server is running on port : ' + port);
 });
