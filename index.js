@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 async function main() {
   try {
-    const mongodbURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+    const mongodbURL = `mongodb+srv://tiwaridisha22082205:TqbZH7PgCJ98NUA5@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
     await mongoose.connect(mongodbURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
