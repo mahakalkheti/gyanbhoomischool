@@ -1,29 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Submit Blog</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #2e86de;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1b4f72;
+    }
+  </style>
 </head>
 <body>
-  <h1>Add a New Blog</h1>
-  <form action="/blogs" method="POST">
-    <label>Student Full name</label><br />
-    <input type="text" name="name" ><br /><br />
-    
-    <label>Father name</label><br />
-    <input type="text" name="father"><br /><br />
+  <div class="form-container">
+    <h1>Add a New Blog</h1>
+    <form action="/blogs" method="POST">
+      <label>Student Full name</label>
+      <input type="text" name="name">
 
-        
-    <label>Mother name</label><br />
-    <input type="text" name="mother" ><br /><br />
+      <label>Father name</label>
+      <input type="text" name="father">
 
-        
-    <label>Address</label><br />
-    <input type="text" name="address"  ><br /><br />
-        
-    <label>contact number</label><br />
-    <input type="number" name="number"  ><br /><br />
-    
-    <button type="submit">Submit</button>
-  </form>
+      <label>Mother name</label>
+      <input type="text" name="mother">
+
+      <label>Address</label>
+      <input type="text" name="address">
+
+      <label>Contact number</label>
+      <input type="number" name="mobile1">
+
+      <label>Alternate contact number</label>
+      <input type="number" name="mobile2">
+
+      <label>Date of Birth</label>
+      <input type="date" name="dob">
+
+      <label>Samagra ID</label>
+      <input type="text" name="samagra">
+
+      <label>Aadhar Card Number</label>
+      <input type="text" name="aadhar">
+
+      <label>Class</label>
+      <input type="text" name="class">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </body>
 </html>

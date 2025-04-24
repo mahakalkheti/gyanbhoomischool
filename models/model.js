@@ -1,13 +1,43 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-const blogSchema = new Schema({
-    name: String, 
-    father: String,
-    mother: String,
-    address: String,
-    number:Number
-  
-  });
+const mongoose = require("mongoose");
 
-const Blog = mongoose.model('Blog', blogSchema);
+const blogSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  father: {
+    type: String,
+    required: true
+  },
+  mother: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  mobile1: {
+    type: String,
+    required: true
+  },
+  mobile2: {
+    type: String
+  },
+  dob: {
+    type: Date
+  },
+  samagra: {
+    type: String
+  },
+  aadhar: {
+    type: String
+  },
+  class: {
+    type: String
+  }
+});
+
+const Blog = mongoose.model("Blog", blogSchema);
+
 module.exports = Blog;

@@ -16,7 +16,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
+
 async function main() {
   try {
     const mongodbURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -42,9 +42,22 @@ app.get("/from", (req, res) => {
 
 // POST: Save blog to DB
 app.post("/blogs", async (req, res) => {
-  const { name, father, mother, address, mobile } = req.body;
+  const { name, father, mother, address, mobile1, mobile2, dob, samagra, aadhar, class: studentClass } = req.body;
+
   try {
-    const newBlog = new Blog({ name, father, mother, address, mobile });
+    const newBlog = new Blog({
+      name,
+      father,
+      mother,
+      address,
+      mobile1,
+      mobile2,
+      dob,
+      samagra,
+      aadhar,
+      class: studentClass
+    });
+
     await newBlog.save();
     res.send("Blog saved successfully!");
   } catch (err) {
@@ -52,6 +65,7 @@ app.post("/blogs", async (req, res) => {
     res.status(500).send("Failed to save blog.");
   }
 });
+
 
 // GET: All blogs
 app.get("/blogs", async (req, res) => {
@@ -71,6 +85,28 @@ app.get("/toppers", (req, res) => {
 app.get("/test", (req, res) => {
     res.render("test.ejs");
 });
+
+app.get("/search", async (req, res) => {
+  const { dob, class: studentClass } = req.query;
+  const filter = {};
+
+  if (dob) {
+    filter.dob = dob;
+  }
+
+  if (studentClass) {
+    filter.class = studentClass;
+  }
+
+  try {
+    const results = await Blog.find(filter);
+    res.render("search.ejs", { results });
+  } catch (error) {
+    console.error("Search error:sssss", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 
 app.get("/gallery", (req, res) => {
     res.render("gallery.ejs");

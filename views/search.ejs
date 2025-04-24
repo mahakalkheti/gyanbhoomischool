@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Admissions</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 30px;
+    }
+    input, select {
+      padding: 10px;
+      margin: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Search Admissions</h1>
+  <form action="/search" method="GET">
+    <label>Search by Date of Admission:</label>
+    <input type="date" name="dob">
+
+    <label>Search by Class:</label>
+    <input type="text" name="class" placeholder="Enter Class">
+
+    <button type="submit">Search</button>
+  </form>
+
+  <% if (results && results.length > 0) { %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Father</th>
+        <th>Class</th>
+        <th>DOB</th>
+        <th>Mobile</th>
+        <th>Address</th>
+      </tr>
+      <% results.forEach(student => { %>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.father %></td>
+          <td><%= student.class %></td>
+          <td><%= student.dob %></td>
+          <td><%= student.mobile1 %></td>
+          <td><%= student.address %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else if (results) { %>
+    <p>No results found.</p>
+  <% } %>
+</body>
+</html>
