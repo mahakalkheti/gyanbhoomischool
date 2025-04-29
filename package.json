@@ -10,10 +10,14 @@
   "author": "Raj Patel",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "mongoose": "^8.13.2",
+    "multer": "^1.4.5-lts.2",
     "path": "^0.12.7"
   }
 }
