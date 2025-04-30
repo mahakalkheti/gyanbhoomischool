@@ -14,6 +14,13 @@ const { students10, students12 } = require("./student");
 const Blog = require("./models/model");
 const User = require("./models/User");
 
+app.use((req,res,next)=>{
+    if(req.headers['x-forwarded-proto'] !== 'https'){
+         return res.redirect('https://'+req.headers.host+req.url);
+    }
+    next();
+});
+
 const app = express();
 
 const uploadDir = path.join(__dirname, 'uploads');
@@ -44,8 +51,8 @@ async function connectDB() {
     try {
         const DB_PASS = process.env.DB_PASS;
         const DB_USER  = process.env.DB_USER;
-        // const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-        const mongodbURL = 'mongodb://127.0.0.1:27017/loginSignupDB';
+        const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+        // const mongodbURL = 'mongodb://127.0.0.1:27017/loginSignupDB';
         await mongoose.connect(mongodbURL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
