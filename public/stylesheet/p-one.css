@@ -183,7 +183,7 @@ body {
     }
   }
 
-  
+/*   
   .nav-container {
     background: linear-gradient(135deg, #004080, #0059b3);
     padding: 10px 30px;
@@ -216,9 +216,9 @@ body {
   .translate-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  }
+  } */
 
-  .nav-links {
+  /* .nav-links {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -227,5 +227,5 @@ body {
     padding: 0;
     gap: 20px;
     flex-wrap: nowrap; 
-  }
+  } */
 

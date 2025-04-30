@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+  }
+  
+  .header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .logo {
+    width: 80px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+  
+  .top-buttons {
+    background-color: #003366;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .top-buttons button {
+    padding: 10px 15px;
+    background-color: #0a3d62;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .top-buttons button >a{
+    text-decoration: none;
+    color: white;
+  }
+  
+
+
+  nav {
+    background-color: #0a3d62;
+    position: relative;
+  }
+  
+  .menu-icon {
+    display: none;
+    color: white;
+    font-size: 26px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  #menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 10px;
+  }
+  
+  #menu li {
+    margin: 8px 15px;
+  }
+  
+  #menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+  }
+  
+  #menu li a:hover,
+  .highlight {
+    background-color: #00d2ff;
+    color: black;
+    border-radius: 4px;
+  }
+ 
+  @media screen and (max-width: 768px) {
+    .menu-icon {
+      display: block;
+    }
+  
+    #menu {
+      display: none;
+      flex-direction: column;
+      background-color: #0a3d62;
+      width: 100%;
+    }
+  
+    #menu.show {
+      display: flex;
+    }
+  
+    #menu li {
+      margin: 10px 0;
+      text-align: center;
+    }
+  }
+  

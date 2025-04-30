@@ -1,0 +1,44 @@
+
+  <link rel="stylesheet" href="/stylesheet/navbar.css"/>
+<body>
+
+  <header class="header">
+    <img src="/img/school.png" alt="Logo" class="logo" />
+    <h1>Gyan Bhoomi School Dobhi</h1>
+  </header>
+
+  <div class="top-buttons">
+    <button ><a href="/pay">Online Payment</a></button>
+    <button style="background-color:#218838;"><a href="login">login</a></button>
+  </div>
+
+  <nav>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <ul id="menu">
+      <li><a href="/">Home</a></li>
+      <% if (user) { %>
+         
+      <li><a href="/test">Test</a></li>
+      <li><a href="/show">Fees details</a></li>
+      <li><a href="/search">Admission Search</a></li>
+
+      <% } %>
+      <li><a href="/from">Admission From</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+
+      <li><a href="#" class="highlight">Fee Structure</a></li>
+    </ul>
+  </nav>
+
+ 
+  <script>
+    function toggleMenu() {
+  const menu = document.getElementById('menu');
+  menu.classList.toggle('show');
+  }
+  </script>
+
+</body>
+
+
+

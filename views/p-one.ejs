@@ -4,37 +4,7 @@
 
 <body>
 
-  <div class="nav-container">
-    <div class="right-nav">
-      GBPHS SCHOOL DOBHI
-    </div>
-
-    <ul class="nav-links" id="navMenu">
-      <li><a href="/pay" class="test-btn">Fees pay</a></li>
-      <li><a href="/gallery" class="gallery-btn">Gallery</a></li>
-
-
-      <% if (user) { %>
-        <li><a href="/test" class="test-btn">Test</a></li>
-        <li><a href="/from" class="admission-btn-nav">Admission Form</a></li> 
-        <li><a href="/search" class="admission-btn-nav">Admission Search</a></li> 
-        <li><a href="/show" class="test-btn">show</a></li>
-
-
-
-      <% } else { %>
-        <li><a href="/from" class="admission-btn-nav">Admission Form</a></li>      <% } %>
-
-    </ul>
-
-    <div class="left-nav">
-      <a href="javascript:void(0);" class="translate-btn" onclick="document.getElementById('google_translate_element').style.display='block'">Translate</a>
-    </div>
-
-  </div>
-
-  <div id="google_translate_element" style="display:none; position:fixed; top:70px; left:20px; z-index:9999;"></div>
-
+ 
   <div class="p-t-container">
     <marquee class="announcement">🎉 Admission Open for Session 2025-26 🎉</marquee>
 
@@ -58,8 +28,9 @@
 
         <div class="image-slider-container">
           <div class="image-slider">
-            <img src="/img/school/school1.jpg" alt="School Campus">
             <img src="/img/school/side.jpg" alt="Classroom">
+            <img src="/img/school/school1.jpg" alt="School Campus">
+
             <img src="/img/school/gate.jpg" alt="Library">
             <img src="/img/school/toilate.jpg" alt="Playground">
           </div>
@@ -69,12 +40,7 @@
     </div>
   </div>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('navMenu');
-      menu.classList.toggle('active');
-    }
-  </script>
+ 
 
 </body>
 </html>

@@ -44,8 +44,8 @@ async function connectDB() {
     try {
         const DB_PASS = process.env.DB_PASS;
         const DB_USER  = process.env.DB_USER;
-        const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-        // const mongodbURL = 'mongodb://127.0.0.1:27017/loginSignupDB';
+        // const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+        const mongodbURL = 'mongodb://127.0.0.1:27017/loginSignupDB';
         await mongoose.connect(mongodbURL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -129,12 +129,10 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-// Login Page
 app.get('/login', (req, res) => {
     res.render('login');
 });
 
-// Login Post
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -143,8 +141,8 @@ app.post('/login', async (req, res) => {
         if (user) {
             const isMatch = await bcrypt.compare(password, user.password);
             if (isMatch) {
-                req.session.user = user; // store user in session
-                res.render('main.ejs', { students10, students12 });
+                req.session.user = user; 
+                res.redirect('/');
             } else {
                 res.send('Incorrect Password');
             }
@@ -157,7 +155,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Admission Form Page
 app.get("/from", (req, res) => {
     res.render("from");
 });
@@ -165,7 +162,6 @@ app.get("/from", (req, res) => {
 app.get("/test", (req, res) => {
     res.render("test.ejs");
 });
-// Save New Admission
 app.post("/blogs", async (req, res) => {
     const { name, father, mother, address, mobile1, mobile2, dob, samagra, aadhar, class: studentClass } = req.body;
 
