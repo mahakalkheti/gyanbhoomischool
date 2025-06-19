@@ -1,62 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Fee Payments</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
-    table {
-      width: 80%;
-      margin: 0 auto;
-      border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #28a745;
-      color: white;
-    }
-    img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-    }
-  </style>
-</head>
-<body>
-  <h2 style="text-align:center;">All Fee Payment Details</h2>
+<html lang="hi">
 
-  <table>
-    <thead>
-      <tr>
-        <th>Student Name</th>
-        <th>Father's Name</th>
-        <th>Fee Amount</th>
-        <th>Payment Screenshot</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% fees.forEach(fee => { %>
-        <tr>
-          <td><%= fee.name %></td>
-          <td><%= fee.fatherName %></td>
-          <td><%= fee.amount %></td>
-          <td><img src="/<%= fee.screenshot %>" alt="Screenshot"></td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Records - Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/admin-style.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <form action="/show" method="GET" class="search-form">
+            <input type="text" name="search" placeholder="🔍 Search Student Name" value="<%= searchQuery %>" required>
+            <button type="submit">Search</button>
+        </form>
+      
+        <header class="admin-header">
+            <h1>📊 Fee Management Dashboard</h1>
+            <p>Total Records: <%= feeRecords.length %>
+            </p>
+        </header>
+
+        <% if (studentSummary) { %>
+            <div class="student-summary">
+                <h2>📋 Summary: <%= studentSummary.studentName %> (<%= studentSummary.class %>)</h2>
+                <ul>
+                    <li><strong>👨 Father’s Name:</strong>
+                        <%= studentSummary.fatherName %>
+                    </li>
+                    <li><strong>🎓 Roll Number:</strong>
+                        <%= studentSummary.rollNumber %>
+                    </li>
+                    <li><strong>💰 Total Paid:</strong> ₹<%= studentSummary.totalPaid.toLocaleString() %>
+                    </li>
+                    <li><strong>🧾 Total Remaining:</strong> ₹<%= studentSummary.totalRemaining.toLocaleString() %>
+                    </li>
+                    <li><strong>📅 Payments Made:</strong>
+                        <%= studentSummary.totalPayments %> times
+                    </li>
+                </ul>
+            </div>
+            <% } %>
+
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Total Collected</h3>
+                        <p class="amount">₹<%= feeRecords.reduce((sum, record)=> sum + record.paidAmount,
+                                0).toLocaleString() %></p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Amount</h3>
+                        <p class="amount pending">₹<%= feeRecords.reduce((sum, record)=> sum + record.remainingAmount,
+                                0).toLocaleString() %></p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Verified Payments</h3>
+                        <p class="count">
+                            <%= feeRecords.filter(record=> record.status === 'Verified').length %>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="records-container">
+                    <% if (feeRecords.length===0) { %>
+                        <div class="no-records">
+                            <p>कोई फीस रिकॉर्ड नहीं मिला</p>
+                        </div>
+                        <% } else { %>
+                            <% feeRecords.forEach(record=> { %>
+                                <div class="record-card">
+    <a href="/receipt/<%= record._id %>" class="btn">🧾 Generate Receipt</a>
+
+                                    <div class="record-header">
+                                        <h3>
+                                            <%= record.studentName %>
+                                        </h3>
+                                        <span class="status <%= record.status.toLowerCase() %>">
+                                            <%= record.status %>
+                                        </span>
+                                    </div>
+
+                                    <div class="record-details">
+                                        <div class="detail-row">
+                                            <span class="label">Father's Name:</span>
+                                            <span class="value">
+                                                <%= record.fatherName %>
+                                            </span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Roll Number:</span>
+                                            <span class="value">
+                                                <%= record.rollNumber %>
+                                            </span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Class:</span>
+                                            <span class="value">
+                                                <%= record.class %>
+                                            </span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Month/Year:</span>
+                                            <span class="value">
+                                                <%= record.month %>
+                                                    <%= record.year %>
+                                            </span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Contact:</span>
+                                            <span class="value">
+                                                <%= record.contactNumber %>
+                                            </span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Address:</span>
+                                            <span class="value">
+                                                <%= record.address %>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="payment-details">
+                                        <div class="payment-info">
+                                            <div class="amount-info">
+                                                <div class="amount-item">
+                                                    <span class="label">Total Fees:</span>
+                                                    <span class="amount">₹<%= record.totalFees ? record.totalFees.toLocaleString() : "0" %></span>
+
+                                                    </span>
+                                                </div>
+                                                <div class="amount-item paid">
+                                                    <span class="label">Paid:</span>
+                                                    <span class="amount">₹<%= record.totalFees ? record.totalFees.toLocaleString() : "0" %></span> <!-- ✅ Fixed -->
+
+                                                    </span>
+                                                </div>
+                                                <div class="amount-item remaining">
+                                                    <span class="label">Remaining:</span>
+                                                    <span class="amount">₹<%= record.remainingAmount ? record.remainingAmount.toLocaleString() : "0" %></span>
+
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="payment-method-info">
+                                                <p><strong>Payment Method:</strong>
+                                                    <%= record.paymentMethod %>
+                                                </p>
+                                                <p><strong>Transaction ID:</strong>
+                                                    <%= record.transactionId %>
+                                                </p>
+                                                <p><strong>Payment Date:</strong>
+                                                    <%= record.paymentDate.toLocaleDateString('hi-IN') %>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="screenshot-container">
+                                            <h4>Payment Screenshot:</h4>
+                                            <img src="/uploads/<%= record.screenshotPath %>" alt="Payment Screenshot"
+                                                class="payment-screenshot">
+                                        </div>
+                                    </div>
+
+                                    <div class="action-buttons">
+                                        <form method="POST" action="/update-status/<%= record._id %>"
+                                            style="display: inline;">
+                                            <select name="status" onchange="this.form.submit()">
+                                                <option value="Pending" <%=record.status==='Pending' ? 'selected' : ''
+                                                    %>>Pending</option>
+                                                <option value="Verified" <%=record.status==='Verified' ? 'selected' : ''
+                                                    %>>Verified</option>
+                                                <option value="Rejected" <%=record.status==='Rejected' ? 'selected' : ''
+                                                    %>>Rejected</option>
+                                            </select>
+                                        </form>
+
+                                        <!-- Delete Button -->
+                                        <form method="POST" action="/delete-fee/<%= record._id %>"
+                                            style="display: inline;"
+                                            onsubmit="return confirm('Kya aap sure ho ki is record ko delete karna hai?')">
+                                            <button type="submit" class="delete-btn">🗑️ Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } %>
+                </div>
+    </div>
+
 </body>
+
 </html>

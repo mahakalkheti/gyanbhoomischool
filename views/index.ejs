@@ -1,106 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fees Payment</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
-    .container {
-      width: 60%;
-      margin: 0 auto;
-      background-color: white;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      font-size: 14px;
-      margin-bottom: 5px;
-      display: block;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-    .qr-code {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .emergency-contact {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .emergency-contact a {
-      font-size: 18px;
-      color: #007bff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payment Form</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
 </head>
+
 <body>
-  <div class="container">
-    <h2>Fee Payment</h2>
+    <div class="container">
+        <div class="form-container">
+            <h1>🎓 Fee Payment Form</h1>
+            <p class="subtitle">कृपया सभी जानकारी सही-सही भरें</p>
 
-    <!-- QR Code Section -->
-    <div class="qr-code">
-      <img src="/uploads/qr-code.png" alt="QR Code" width="200px">
-      <p>Scan the QR Code for more information</p>
+            <form action="/submit-fee" method="POST" enctype="multipart/form-data" id="feeForm">
+                <div class="form-group">
+                    <label for="studentName">Student Name / छात्र का नाम *</label>
+                    <input type="text" id="studentName" name="studentName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fatherName">Father's Name / पिता का नाम *</label>
+                    <input type="text" id="fatherName" name="fatherName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number / रोल नंबर *</label>
+                        <input type="text" id="rollNumber" name="rollNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="class">Class / कक्षा *</label>
+                        <select id="class" name="class" required>
+                            <option value="">Select Class</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                            <option value="9th">9th</option>
+                            <option value="10th">10th</option>
+                            <option value="11th">11th</option>
+                            <option value="12th">12th</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="month">Month / महीना *</label>
+                        <select id="month" name="month" required>
+                            <option value="">Select Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year / साल *</label>
+                        <input type="number" id="year" name="year" min="2020" max="2030" value="2025" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalFees">Total Fees / कुल फीस *</label>
+                        <input type="number" id="totalFees" name="totalFees" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paidAmount">Paid Amount / जमा की गई राशि *</label>
+                        <input type="number" id="paidAmount" name="paidAmount" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number / संपर्क नंबर *</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address / पता *</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method / भुगतान का तरीका *</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Net Banking">Net Banking</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionId">Transaction ID / लेनदेन आईडी *</label>
+                    <input type="text" id="transactionId" name="transactionId" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentScreenshot">Payment Screenshot / भुगतान का स्क्रीनशॉट *</label>
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                    <small>Upload screenshot of your payment (Max 5MB)</small>
+                </div>
+
+                <!-- <button type="submit" class="submit-btn">
+                    💳 Submit Fee Payment / फीस जमा करें
+                </button> -->
+                <form id="feeForm" enctype="multipart/form-data">
+                    <!-- form fields as usual -->
+                    <button type="submit"  class="btn">Submit</button>
+                </form>
+
+                <div id="popup" class="popup hidden">
+                    <div class="popup-content">
+                        <span id="popup-message"></span>
+                        <button onclick="closePopup()" class="btn btn-secondary">Close</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
 
-    <!-- Fee Payment Form -->
-    <form action="/submit-fee" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="name">Student Name</label>
-        <input type="text" name="name" id="name" required>
-      </div>
+    <script>
 
-      <div class="form-group">
-        <label for="fatherName">Father's Name</label>
-        <input type="text" name="fatherName" id="fatherName" required>
-      </div>
+        document.getElementById('feeForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-      <div class="form-group">
-        <label for="amount">Fee Amount</label>
-        <input type="number" name="amount" id="amount" required>
-      </div>
+            const form = e.target;
+            const formData = new FormData(form);
 
-      <div class="form-group">
-        <label for="screenshot">Fee Payment Screenshot</label>
-        <input type="file" name="screenshot" id="screenshot" accept="image/*" required>
-      </div>
+            try {
+                const res = await fetch('/submit-fee', {
+                    method: 'POST',
+                    body: formData
+                });
 
-      <button type="submit">Submit</button>
-    </form>
+                const result = await res.json();
+                showPopup(result.message || 'Submission complete.');
+            } catch (err) {
+                showPopup('❌ Error submitting fee. Try again.');
+            }
+        });
 
-    <!-- Emergency Contact -->
-    <div class="emergency-contact">
-      <p>If you face any issues, please call our emergency number:</p>
-      <a href="tel:+18001234567">+1 800 123 4567</a>
-    </div>
+        function showPopup(message) {
+            document.getElementById('popup-message').innerText = message;
+            document.getElementById('popup').classList.remove('hidden');
+        }
 
-    <!-- View All Payments -->
-    <div class="view-all">
-      <a href="/show" style="display:block; text-align:center; margin-top:30px;">View All Payments</a>
-    </div>
-  </div>
+        function closePopup() {
+            document.getElementById('popup').classList.add('hidden');
+        }
+
+
+        document.getElementById('feeForm').addEventListener('submit', function (e) {
+            const totalFees = parseFloat(document.getElementById('totalFees').value);
+            const paidAmount = parseFloat(document.getElementById('paidAmount').value);
+
+            if (paidAmount > totalFees) {
+                e.preventDefault();
+                alert('Paid amount cannot be greater than total fees!');
+                return false;
+            }
+        });
+
+        // Auto calculate remaining amount
+        document.getElementById('paidAmount').addEventListener('input', function () {
+            const totalFees = parseFloat(document.getElementById('totalFees').value) || 0;
+            const paidAmount = parseFloat(this.value) || 0;
+            const remaining = totalFees - paidAmount;
+
+            if (remaining >= 0) {
+                console.log('Remaining amount: ₹' + remaining);
+            }
+        });
+    </script>
 </body>
+
 </html>

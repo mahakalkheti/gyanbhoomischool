@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Fee Receipt</title>
+  <style>
+    body {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .receipt-container {
+      width: 700px;
+      margin: auto;
+      background: #fff;
+      border: 2px solid #333;
+      padding: 20px 30px;
+      color: #000;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .sub-header {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .info-section {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+
+    .info-section input {
+      border: none;
+      border-bottom: 1px solid #333;
+      outline: none;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #000;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: right;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    .print-btn {
+      display: block;
+      margin: 20px auto;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media print {
+      .print-btn {
+        display: none;
+      }
+
+      input {
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="receipt-container" id="receipt">
+  <div class="header">
+    <h2>ज्ञान भूमि हायर सेकेंडरी स्कूल, डोंबी</h2>
+  </div>
+  <div class="sub-header">(संचालित - भूमि सेवा शिक्षण समिति), डोंबी, जिला - नरसिंहपुर (म.प्र.)</div>
+
+  <div class="info-section">
+    रसीद संख्या: <input type="text" id="receiptNo" placeholder="रसीद संख्या डालें">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    दिनांक: <%= new Date().toLocaleDateString('hi-IN') %>
+  </div>
+
+  <div class="info-section">
+    नाम: <%= record.studentName %><br>
+    पिता का नाम: <%= record.fatherName %><br>
+    कक्षा: <%= record.class %> <br><br>
+        जिन महीनों की फीस जमा की गई है:  
+    <input type="text" placeholder="उदाहरण: जनवरी, फरवरी, मार्च" style="width: 100%; font-size: 16px;">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>क्र.</th>
+        <th>विवरण</th>
+        <th>₹</th>
+        <th>पैसे</th>
+      </tr>
+    </thead>
+    <tbody id="feeDetails">
+      <tr>
+        <td>1</td>
+        <td>मासिक शुल्क</td>
+        <td><input type="number" value="<%= record.paidAmount %>" id="monthlyFee"></td>
+        <td>00</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><input type="text" placeholder="अन्य विवरण"></td>
+        <td><input type="number"></td>
+        <td>00</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><input type="text" placeholder="अन्य विवरण"></td>
+        <td><input type="number"></td>
+        <td>00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    कुल योग (₹): <input type="number" id="totalAmount" value="<%= record.paidAmount %>">
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🧾 प्रिंट रसीद</button>
+
+</body>
+</html>
