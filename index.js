@@ -284,17 +284,17 @@ app.get("/show", async (req, res) => {
 
 
 app.post("/update-status/:id", async (req, res) => {
-    const { id } = req.params;
-    const { status } = req.body;
+  const { id } = req.params;
+  const { status } = req.body;
 
-    try {
-        await FeeRecord.findByIdAndUpdate(id, { status: status });
-        res.redirect("/show"); // Show page par wapas bhejo
-    } catch (err) {
-        console.error("Status update error:", err);
-        res.status(500).send("Server Error");
-    }
-} 
+  try {
+    await FeeRecord.findByIdAndUpdate(id, { status: status });
+    res.redirect("/show"); // Show page par wapas bhejo
+  } catch (err) {
+    console.error("Status update error:", err);
+    res.status(500).send("Server Error");
+  }
+}); 
 
 app.post("/delete-fee/:id", async (req, res) => {
   try {
