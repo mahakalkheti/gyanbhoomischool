@@ -294,7 +294,7 @@ app.post("/update-status/:id", async (req, res) => {
         console.error("Status update error:", err);
         res.status(500).send("Server Error");
     }
-} ji
+} 
 
 app.post("/delete-fee/:id", async (req, res) => {
   try {
