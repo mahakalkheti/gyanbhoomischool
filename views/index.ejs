@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1>🎓 Fee Payment Form</h1>
+            <h1> Fee Payment Form</h1>
             <p class="subtitle">कृपया सभी जानकारी सही-सही भरें</p>
 
             <form action="/submit-fee" method="POST" enctype="multipart/form-data" id="feeForm">
@@ -120,7 +120,7 @@
                 </div>
 
                 <!-- <button type="submit" class="submit-btn">
-                    💳 Submit Fee Payment / फीस जमा करें
+                    Submit Fee Payment / फीस जमा करें
                 </button> -->
                 <form id="feeForm" enctype="multipart/form-data">
                     <!-- form fields as usual -->
@@ -155,7 +155,7 @@
                 const result = await res.json();
                 showPopup(result.message || 'Submission complete.');
             } catch (err) {
-                showPopup('❌ Error submitting fee. Try again.');
+                showPopup('Error submitting fee. Try again.');
             }
         });
 
