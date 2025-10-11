@@ -16,26 +16,26 @@
         </form>
       
         <header class="admin-header">
-            <h1>📊 Fee Management Dashboard</h1>
+            <h1>Fee Management Dashboard</h1>
             <p>Total Records: <%= feeRecords.length %>
             </p>
         </header>
 
         <% if (studentSummary) { %>
             <div class="student-summary">
-                <h2>📋 Summary: <%= studentSummary.studentName %> (<%= studentSummary.class %>)</h2>
+                <h2> Summary: <%= studentSummary.studentName %> (<%= studentSummary.class %>)</h2>
                 <ul>
-                    <li><strong>👨 Father’s Name:</strong>
+                    <li><strong>Father’s Name:</strong>
                         <%= studentSummary.fatherName %>
                     </li>
-                    <li><strong>🎓 Roll Number:</strong>
+                    <li><strong> Roll Number:</strong>
                         <%= studentSummary.rollNumber %>
                     </li>
-                    <li><strong>💰 Total Paid:</strong> ₹<%= studentSummary.totalPaid.toLocaleString() %>
+                    <li><strong> Total Paid:</strong> ₹<%= studentSummary.totalPaid.toLocaleString() %>
                     </li>
-                    <li><strong>🧾 Total Remaining:</strong> ₹<%= studentSummary.totalRemaining.toLocaleString() %>
+                    <li><strong> Total Remaining:</strong> ₹<%= studentSummary.totalRemaining.toLocaleString() %>
                     </li>
-                    <li><strong>📅 Payments Made:</strong>
+                    <li><strong>Payments Made:</strong>
                         <%= studentSummary.totalPayments %> times
                     </li>
                 </ul>
@@ -70,7 +70,7 @@
                         <% } else { %>
                             <% feeRecords.forEach(record=> { %>
                                 <div class="record-card">
-    <a href="/receipt/<%= record._id %>" class="btn">🧾 Generate Receipt</a>
+    <a href="/receipt/<%= record._id %>" class="btn"> Generate Receipt</a>
 
                                     <div class="record-header">
                                         <h3>
