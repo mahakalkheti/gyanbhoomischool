@@ -294,19 +294,7 @@ app.post("/update-status/:id", async (req, res) => {
         console.error("Status update error:", err);
         res.status(500).send("Server Error");
     }
-});
-
-// // Update payment status
-// app.post("/update-status/:id", async (req, res) => {
-//   try {
-//     const { status } = req.body;
-//     await Fee.findByIdAndUpdate(req.params.id, { status });
-//     res.redirect("/show");
-//   } catch (error) {
-//     console.error(error);
-//     res.redirect("/show");
-//   }
-// });
+} ji
 
 app.post("/delete-fee/:id", async (req, res) => {
   try {
