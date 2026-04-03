@@ -24,9 +24,8 @@ const CLASS_MONTHLY_FEES = {
   "12th": 1500,
 };
 
-const razorpayKeyId = process.env.RAZORPAY_KEY_ID || "rzp_live_SYiBqGIKQCDusP";
-const razorpayKeySecret =
-  process.env.RAZORPAY_KEY_SECRET || "7GuJllQPgnoJ6tpqy1NdvsOB";
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
 
 const razorpay = new Razorpay({
   key_id: razorpayKeyId,

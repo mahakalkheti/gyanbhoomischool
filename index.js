@@ -36,10 +36,18 @@ app.use(authRoutes);
 app.use(feeRoutes);
 app.use(admissionRoutes);
 app.use(siteRoutes);
+app.use((req,res,next)=>{
+    if(req.headers['x-forwarded-proto'] !== 'https'){
+         return res.redirect('https://'+req.headers.host+req.url);
+    }
+    next();
+});
 
 async function connectDB() {
   try {
-    const mongodbURL = "mongodb://127.0.0.1:27017/gyanbhoomi";
+    
+       const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+      //const mongodbURL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/gyanbhoomi";
     await mongoose.connect(mongodbURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -56,7 +64,7 @@ app.get("*", (req, res) => {
   res.status(404).send("Page Not Found");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
