@@ -11,27 +11,27 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1> Fee Payment Form</h1>
-            <p class="subtitle">कृपया सभी जानकारी सही-सही भरें</p>
+            <h1>Fee Payment Form</h1>
+            <p class="subtitle">Class ke hisab se monthly fee auto aayegi. Additional payment bhi add kar sakte hain.</p>
 
             <form action="/submit-fee" method="POST" enctype="multipart/form-data" id="feeForm">
                 <div class="form-group">
-                    <label for="studentName">Student Name / छात्र का नाम *</label>
+                    <label for="studentName">Student Name *</label>
                     <input type="text" id="studentName" name="studentName" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="fatherName">Father's Name / पिता का नाम *</label>
+                    <label for="fatherName">Father's Name *</label>
                     <input type="text" id="fatherName" name="fatherName" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="rollNumber">Roll Number / रोल नंबर *</label>
+                        <label for="rollNumber">Roll Number *</label>
                         <input type="text" id="rollNumber" name="rollNumber" required>
                     </div>
                     <div class="form-group">
-                        <label for="class">Class / कक्षा *</label>
+                        <label for="class">Class *</label>
                         <select id="class" name="class" required>
                             <option value="">Select Class</option>
                             <option value="1st">1st</option>
@@ -52,7 +52,7 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="month">Month / महीना *</label>
+                        <label for="month">Month *</label>
                         <select id="month" name="month" required>
                             <option value="">Select Month</option>
                             <option value="January">January</option>
@@ -70,126 +70,302 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="year">Year / साल *</label>
+                        <label for="year">Year *</label>
                         <input type="number" id="year" name="year" min="2020" max="2030" value="2025" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="totalFees">Total Fees / कुल फीस *</label>
-                        <input type="number" id="totalFees" name="totalFees" step="0.01" required>
+                        <label for="monthlyFee">Monthly Fee *</label>
+                        <input type="number" id="monthlyFee" name="monthlyFee" step="0.01" readonly required>
                     </div>
                     <div class="form-group">
-                        <label for="paidAmount">Paid Amount / जमा की गई राशि *</label>
-                        <input type="number" id="paidAmount" name="paidAmount" step="0.01" required>
+                        <label for="additionalPayment">Additional Payment</label>
+                        <input type="number" id="additionalPayment" name="additionalPayment" step="0.01" min="0" value="0">
+                        <small>Example: Exam fee, transport, form fee, other charges</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalFees">Total Fees *</label>
+                        <input type="number" id="totalFees" name="totalFees" step="0.01" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paidAmount">Paid Amount *</label>
+                        <input type="number" id="paidAmount" name="paidAmount" step="0.01" readonly required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="contactNumber">Contact Number / संपर्क नंबर *</label>
+                    <label for="contactNumber">Contact Number *</label>
                     <input type="tel" id="contactNumber" name="contactNumber" pattern="[0-9]{10}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Address / पता *</label>
+                    <label for="address">Address *</label>
                     <textarea id="address" name="address" rows="3" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="paymentMethod">Payment Method / भुगतान का तरीका *</label>
-                    <select id="paymentMethod" name="paymentMethod" required>
-                        <option value="">Select Payment Method</option>
-                        <option value="UPI">UPI</option>
-                        <option value="Net Banking">Net Banking</option>
-                        <option value="Debit Card">Debit Card</option>
-                        <option value="Credit Card">Credit Card</option>
-                        <option value="Cash">Cash</option>
-                    </select>
+                    <label for="paymentMethodDisplay">Payment Method</label>
+                    <input type="text" id="paymentMethodDisplay" value="Razorpay Only" readonly>
+                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="Razorpay">
                 </div>
 
-                <div class="form-group">
-                    <label for="transactionId">Transaction ID / लेनदेन आईडी *</label>
-                    <input type="text" id="transactionId" name="transactionId" required>
-                </div>
+                <input type="hidden" id="transactionId" name="transactionId">
 
-                <div class="form-group">
-                    <label for="paymentScreenshot">Payment Screenshot / भुगतान का स्क्रीनशॉट *</label>
-                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
-                    <small>Upload screenshot of your payment (Max 5MB)</small>
+                <div class="form-row">
+                    <button type="button" id="razorpayBtn" class="btn">Pay with Razorpay</button>
+                    <button type="submit" class="btn">Submit</button>
                 </div>
-
-                <!-- <button type="submit" class="submit-btn">
-                    Submit Fee Payment / फीस जमा करें
-                </button> -->
-                <form id="feeForm" enctype="multipart/form-data">
-                    <!-- form fields as usual -->
-                    <button type="submit"  class="btn">Submit</button>
-                </form>
 
                 <div id="popup" class="popup hidden">
                     <div class="popup-content">
                         <span id="popup-message"></span>
-                        <button onclick="closePopup()" class="btn btn-secondary">Close</button>
+                        <button type="button" id="popupOkBtn" class="btn btn-secondary" onclick="handlePopupOk()">OK</button>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        const classMonthlyFees = <%- JSON.stringify(classMonthlyFees) %>;
+        const feeForm = document.getElementById('feeForm');
+        const classField = document.getElementById('class');
+        const monthField = document.getElementById('month');
+        const monthlyFeeField = document.getElementById('monthlyFee');
+        const additionalPaymentField = document.getElementById('additionalPayment');
+        const totalFeesField = document.getElementById('totalFees');
+        const paidAmountField = document.getElementById('paidAmount');
+        const paymentMethodField = document.getElementById('paymentMethod');
+        const transactionIdField = document.getElementById('transactionId');
+        const razorpayBtn = document.getElementById('razorpayBtn');
+        const submitBtn = feeForm.querySelector('button[type="submit"]');
+        const popupOkBtn = document.getElementById('popupOkBtn');
+        let popupRedirectUrl = '';
 
-        document.getElementById('feeForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
+        function resetFeeForm() {
+            feeForm.reset();
+            transactionIdField.value = '';
+            additionalPaymentField.value = '0';
+            paymentMethodField.value = 'Razorpay';
+            updateFeeBreakdown();
+            razorpayBtn.disabled = false;
+            submitBtn.disabled = false;
+        }
 
-            const form = e.target;
-            const formData = new FormData(form);
-
-            try {
-                const res = await fetch('/submit-fee', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await res.json();
-                showPopup(result.message || 'Submission complete.');
-            } catch (err) {
-                showPopup('Error submitting fee. Try again.');
-            }
-        });
-
-        function showPopup(message) {
+        function showPopup(message, redirectUrl = '') {
             document.getElementById('popup-message').innerText = message;
+            popupRedirectUrl = redirectUrl;
+            popupOkBtn.innerText = redirectUrl ? 'OK' : 'Close';
             document.getElementById('popup').classList.remove('hidden');
         }
 
         function closePopup() {
             document.getElementById('popup').classList.add('hidden');
+            popupRedirectUrl = '';
         }
 
+        function handlePopupOk() {
+            const redirectUrl = popupRedirectUrl;
+            closePopup();
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        }
 
-        document.getElementById('feeForm').addEventListener('submit', function (e) {
-            const totalFees = parseFloat(document.getElementById('totalFees').value);
-            const paidAmount = parseFloat(document.getElementById('paidAmount').value);
+        async function submitFeeRecord() {
+            const formData = new FormData(feeForm);
+            const res = await fetch('/submit-fee', {
+                method: 'POST',
+                body: formData
+            });
 
-            if (paidAmount > totalFees) {
-                e.preventDefault();
-                alert('Paid amount cannot be greater than total fees!');
+            const result = await res.json();
+
+            if (!res.ok || !result.success) {
+                throw new Error(result.message || 'Fee save failed.');
+            }
+
+            return result;
+        }
+
+        function updateFeeBreakdown() {
+            const selectedClass = classField.value;
+            const monthlyFee = classMonthlyFees[selectedClass] || 0;
+            const additionalPayment = parseFloat(additionalPaymentField.value) || 0;
+            const total = monthlyFee + additionalPayment;
+
+            monthlyFeeField.value = monthlyFee ? monthlyFee.toFixed(2) : '';
+            totalFeesField.value = total ? total.toFixed(2) : '';
+            paidAmountField.value = total ? total.toFixed(2) : '';
+        }
+
+        function validateFeeFields() {
+            if (!classField.value || !monthField.value) {
+                showPopup('Class aur month select kariye.');
                 return false;
             }
-        });
 
-        // Auto calculate remaining amount
-        document.getElementById('paidAmount').addEventListener('input', function () {
-            const totalFees = parseFloat(document.getElementById('totalFees').value) || 0;
-            const paidAmount = parseFloat(this.value) || 0;
-            const remaining = totalFees - paidAmount;
+            if (!monthlyFeeField.value || !totalFeesField.value || !paidAmountField.value) {
+                showPopup('Fee amount generate nahi ho pa raha. Class dubara select kariye.');
+                return false;
+            }
 
-            if (remaining >= 0) {
-                console.log('Remaining amount: ₹' + remaining);
+            return true;
+        }
+
+        function validateRequiredFields() {
+            const requiredIds = [
+                'studentName',
+                'fatherName',
+                'rollNumber',
+                'class',
+                'month',
+                'year',
+                'contactNumber',
+                'address',
+                'paymentMethod'
+            ];
+
+            for (const id of requiredIds) {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    showPopup('Kripya sabhi required details bharen.');
+                    field.focus();
+                    return false;
+                }
+            }
+
+            return validateFeeFields();
+        }
+
+        classField.addEventListener('change', updateFeeBreakdown);
+        additionalPaymentField.addEventListener('input', updateFeeBreakdown);
+
+        razorpayBtn.addEventListener('click', async function () {
+            paymentMethodField.value = 'Razorpay';
+
+            if (!validateRequiredFields()) {
+                return;
+            }
+
+            const amount = Number(paidAmountField.value);
+
+            try {
+                const orderRes = await fetch('/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount })
+                });
+
+                if (!orderRes.ok) {
+                    throw new Error('Order create nahi hua');
+                }
+
+                const order = await orderRes.json();
+
+                const options = {
+                    key: '<%= razorpayKeyId %>',
+                    amount: order.amount,
+                    currency: 'INR',
+                    name: 'Gyan Bhoomi School',
+                    description: 'School Fee Payment',
+                    order_id: order.id,
+                    prefill: {
+                        name: document.getElementById('studentName').value.trim(),
+                        contact: document.getElementById('contactNumber').value.trim()
+                    },
+                    notes: {
+                        class: classField.value,
+                        month: monthField.value,
+                        year: document.getElementById('year').value,
+                        additionalPayment: additionalPaymentField.value || '0'
+                    },
+                    theme: {
+                        color: '#0f9d58'
+                    },
+                    handler: async function (response) {
+                        try {
+                            const verifyRes = await fetch('/verify-payment', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(response)
+                            });
+
+                            const result = await verifyRes.json();
+
+                            if (!result.success) {
+                                showPopup('Payment verify nahi hua. Dobara try karein.');
+                                return;
+                            }
+
+                            transactionIdField.value = response.razorpay_payment_id;
+                            razorpayBtn.disabled = true;
+                            submitBtn.disabled = true;
+
+                            const saveResult = await submitFeeRecord();
+                            resetFeeForm();
+                            showPopup(
+                                saveResult.message || 'Payment successful aur fee record save ho gaya.',
+                                '/show'
+                            );
+                        } catch (error) {
+                            console.error(error);
+                            razorpayBtn.disabled = false;
+                            submitBtn.disabled = false;
+                            showPopup(error.message || 'Payment ke baad fee save nahi ho payi.');
+                        }
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function (response) {
+                    const message = response.error && response.error.description
+                        ? response.error.description
+                        : 'Payment failed';
+                    showPopup(message);
+                });
+                rzp.open();
+            } catch (error) {
+                console.error(error);
+                showPopup('Razorpay start nahi ho paya. Thodi der baad phir try karein.');
             }
         });
+
+        feeForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            if (!validateRequiredFields()) {
+                return;
+            }
+
+            if (paymentMethodField.value === 'Razorpay' && !transactionIdField.value.trim()) {
+                showPopup('Pehle Razorpay payment complete kijiye.');
+                return;
+            }
+
+            try {
+                submitBtn.disabled = true;
+                const result = await submitFeeRecord();
+                resetFeeForm();
+                showPopup(
+                    result.message || 'Payment successful aur fee record save ho gaya.',
+                    '/show'
+                );
+            } catch (err) {
+                console.error(err);
+                showPopup(err.message || 'Error submitting fee. Try again.');
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        updateFeeBreakdown();
     </script>
 </body>
 

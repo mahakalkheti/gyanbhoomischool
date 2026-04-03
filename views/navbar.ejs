@@ -9,22 +9,29 @@
 
   <div class="top-buttons">
     <button ><a href="/fees">Online Payment</a></button>
-    <button style="background-color:#218838;"><a href="login">login</a></button>
+    <% if (user) { %>
+      <button style="background-color:#218838;"><a href="/logout">Logout</a></button>
+    <% } else { %>
+      <button style="background-color:#218838;"><a href="/login">Login</a></button>
+    <% } %>
   </div>
 
   <nav>
     <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
     <ul id="menu">
       <li><a href="/">Home</a></li>
-      <% if (user) { %>
-         
+      <% if (user && user.role === 'student') { %>
       <li><a href="/test">Test</a></li>
-      <li><a href="/show">Fees details</a></li>
-      <li><a href="/search">Admission Search</a></li>
-
-      <% } %>
-      <li><a href="/from">Admission From</a></li>
+      <li><a href="/from">Admission Form</a></li>
       <li><a href="/gallery">Gallery</a></li>
+      <% } %>
+      <% if (user && user.role === 'staff') { %>
+      <li><a href="/test">Test</a></li>
+      <li><a href="/show">Fees Details</a></li>
+      <li><a href="/search">Admission Search</a></li>
+      <li><a href="/from">Admission Form</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <% } %>
 
       <li><a href="#" class="highlight">Fee Structure</a></li>
     </ul>

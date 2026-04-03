@@ -7,10 +7,18 @@
 </head>
 <body class="signup-body">
     <h1 class="signup-title">Signup</h1>
+    <% if (message) { %>
+        <p class="login-link"><%= message %></p>
+    <% } %>
     <form class="signup-form" action="/signup" method="POST">
         <input type="text" name="name" placeholder="Name" required class="signup-input"><br>
         <input type="email" name="email" placeholder="Email" required class="signup-input"><br>
         <input type="password" name="password" placeholder="Password" required class="signup-input"><br>
+        <select name="role" required class="signup-input">
+            <option value="">Select Account Type</option>
+            <option value="staff">Staff Login</option>
+            <option value="student">Student Login</option>
+        </select><br>
         <button type="submit" class="signup-button">Signup</button>
     </form>
     <p class="login-link">Already have an account? <a href="/login" class="login-anchor">Login</a></p>
