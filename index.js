@@ -45,12 +45,14 @@ app.use((req,res,next)=>{
 
 async function connectDB() {
   try {
-    
-       const mongodbURL = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-      //const mongodbURL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/gyanbhoomi";
+    const mongodbURL =
+      process.env.MONGODB_URI ||
+      (process.env.DB_USER && process.env.DB_PASS
+        ? `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+        : "mongodb://127.0.0.1:27017/gyanbhoomi");
+
     await mongoose.connect(mongodbURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000,
     });
     console.log("Connected to MongoDB");
   } catch (err) {

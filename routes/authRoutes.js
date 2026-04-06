@@ -15,6 +15,13 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   const { name, email, password, role } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+
+  if (!name?.trim() || !normalizedEmail || !password?.trim()) {
+    return res.render("signup.ejs", {
+      message: "Please fill in all required fields.",
+    });
+  }
 
   if (!["staff", "student"].includes(role)) {
     return res.render("signup.ejs", {
@@ -22,16 +29,35 @@ router.post("/signup", async (req, res) => {
     });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   try {
-    const newUser = new User({ name, email, password: hashedPassword, role });
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return res.render("signup.ejs", {
+        message: "User already exists. Please login.",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      name: name.trim(),
+      email: normalizedEmail,
+      password: hashedPassword,
+      role,
+    });
+
     await newUser.save();
     res.redirect("/login?message=Signup successful. Please login.");
   } catch (err) {
     console.error("Signup Error:", err);
+
+    if (err?.code === 11000) {
+      return res.render("signup.ejs", {
+        message: "User already exists. Please login.",
+      });
+    }
+
     res.render("signup.ejs", {
-      message: "Signup failed. Email may already exist.",
+      message: "Signup failed. Please try again later.",
     });
   }
 });
@@ -46,9 +72,10 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.render("login", { message: "User not found." });
     }
