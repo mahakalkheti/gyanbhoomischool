@@ -46,10 +46,8 @@ app.use(siteRoutes);
 async function connectDB() {
   try {
     const mongodbURL =
-      process.env.MONGODB_URI ||
-      (process.env.DB_USER && process.env.DB_PASS
-        ? `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-        : "mongodb://127.0.0.1:27017/gyanbhoomi");
+     "mongodb+srv://tiwaridisha22082205:TqbZH7PgCJ98NUA5@cluster0.iwaylz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        
 
     await mongoose.connect(mongodbURL, {
       serverSelectionTimeoutMS: 10000,
