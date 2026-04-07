@@ -61,7 +61,7 @@ app.use(siteRoutes);
 async function connectDB() {
   try {
     const mongodbURL =
-      "mongodb+srv://tiwaridisha22082205:TqbZH7PgCJ98NUA5@cluster0.iwaylz8.mongodb.net/gyanbhoomi?retryWrites=true&w=majority";
+      "mongodb+srv://tiwaridisha22082205_db_user:ddqRRqogFF0Zyotm@cluster0.iwaylz8.mongodb.net/gyanbhoomi?retryWrites=true&w=majority";
 
     await mongoose.connect(mongodbURL, {
       serverSelectionTimeoutMS: 10000,
